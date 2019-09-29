@@ -213,8 +213,30 @@ public class VariationsOfMandatoryParametersTest {
   @Test(dataProvider = "DataForMandatoryTest")
   public static void checkVariationOfMandatoryParameters(
       String testCaseNumber, HashMap<String, String> queryParam) {
-    RequestSpecification specification = given().queryParams(queryParam);
+    RequestSpecification specification = given().log().all().queryParams(queryParam);
     Response resp = specification.get();
     assertEquals(resp.statusCode(), 200, testCaseNumber);
+  }
+@DataProvider(name="duplicateTest")
+public Object[][] duplicateElements() {
+  HashMap<String, String> queryParams1 = new HashMap<String, String>();
+  HashMap<String, String> queryParams2 = new HashMap<String, String>();
+  queryParams1.put("app_id", "JIlgIjxb334PrWXpDC3w"); // good parameters
+  queryParams1.put("app_code", "QZvw9AhazmUb1tY3uX40DQ"); // good parameters
+  queryParams1.put("name", "Berlin"); // good parameters
+  queryParams1.put("product", "observation"); // good parameters
+  queryParams2.put("app_id", "JIlgIjxb334PrWXpDC3w"); // good parameters
+           Object[][] ret={
+                   {queryParams1,queryParams2},
+
+
+
+    };
+  return  ret;}
+  @Test(dataProvider ="duplicateTest")
+  public static void duplicateQueryParam(HashMap<String,String> duplicateElements,HashMap<String,String> duplicateElements2) {
+
+      RequestSpecification specification = given().log().all().queryParams(duplicateElements).queryParams(duplicateElements2);
+      Response resp = specification.get();
   }
 }
