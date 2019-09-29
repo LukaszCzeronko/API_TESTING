@@ -1,4 +1,4 @@
-package main;
+package validation;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -20,7 +20,7 @@ public class VariationsOfMandatoryParametersTest {
     RestAssured.basePath = "/weather/1.0/report.json";
   }
 
-  @DataProvider(name = "DataForMandatoryTest")
+  @DataProvider(name = "dataForMandatoryTest")
   public static Object[][] getEventAPIInput() {
     HashMap<String, String> queryParams1 = new HashMap<String, String>();
     HashMap<String, String> queryParams2 = new HashMap<String, String>();
@@ -70,7 +70,7 @@ public class VariationsOfMandatoryParametersTest {
     queryParams4.put("product", "observation");
     queryParams4.put("latitude", "52.5170365");
     queryParams4.put("longitude", "13.3888599"); //
-
+//mandatory parameter
     queryParams5.put("App_id", "JIlgIjxb334PrWXpDC3w");
     queryParams5.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParams5.put("product", "observation");
@@ -184,36 +184,36 @@ public class VariationsOfMandatoryParametersTest {
     queryParams22.put("longitude", "0"); // int
 
     Object[][] retObjArr = {
-      {"Tc_1.1", queryParams1},
-      {"TC_1.2", queryParams2},
-      {"TC_1.3", queryParams3},
-      {"TC_1.4", queryParams4},
-      {"TC_1.5", queryParams5},
-      {"TC_1.6", queryParams6},
-      {"Tc_1.7", queryParams7},
-      {"TC_1.8", queryParams8},
-      {"TC_1.9", queryParams9},
-      {"TC_1.10", queryParams10},
-      {"TC_1.11", queryParams11},
-      {"TC_1.12", queryParams12},
-      {"Tc_1.13", queryParams13},
-      {"TC_1.14", queryParams14},
-      {"TC_1.15", queryParams15},
-      {"TC_1.16", queryParams16},
-      {"TC_1.17", queryParams17},
-      {"TC_1.18", queryParams18},
-      {"Tc_1.19", queryParams19},
-      {"TC_1.20", queryParams20},
-      {"TC_1.21", queryParams21},
-      {"TC_1.22", queryParams22},
+      {"Tc_1.1 -authorization problem", queryParams1},
+      {"TC_1.2-authorization problem", queryParams2},
+      {"TC_1.3-authorization problem", queryParams3},
+      {"TC_1.4-authorization problem", queryParams4},
+      {"TC_1.5-mandatory parameter", queryParams5},
+      {"TC_1.6-mandatory parameter", queryParams6},
+      {"Tc_1.7-authorization problem", queryParams7},
+      {"TC_1.8-authorization problem", queryParams8},
+      {"TC_1.9-authorization problem", queryParams9},
+      {"TC_1.10-mandatory parameter", queryParams10},
+      {"TC_1.11-mandatory parameter", queryParams11},
+      {"TC_1.12-mandatory parameter", queryParams12},
+      {"Tc_1.13-mandatory parameter", queryParams13},
+      {"TC_1.14-authorization problem", queryParams14},
+      {"TC_1.15-authorization problem", queryParams15},
+      {"TC_1.16-query parameter problem", queryParams16},
+      {"TC_1.17-query parameter problem", queryParams17},
+      {"TC_1.18-query parameter problem", queryParams18},
+      {"Tc_1.19-query parameter problem", queryParams19},
+      {"TC_1.20-query parameter problem", queryParams20},
+      {"TC_1.21-query parameter problem", queryParams21},
+      {"TC_1.22-query parameter problem", queryParams22},
     };
     return retObjArr;
   }
 
-  @Test(dataProvider = "DataForMandatoryTest")
+  @Test(dataProvider = "dataForMandatoryTest")
   public static void checkVariationOfMandatoryParameters(
       String testCaseNumber, HashMap<String, String> queryParam) {
-    RequestSpecification specification = given().log().all().queryParams(queryParam);
+    RequestSpecification specification = given().queryParams(queryParam);
     Response resp = specification.get();
     assertEquals(resp.statusCode(), 200, testCaseNumber);
   }
@@ -236,7 +236,7 @@ public Object[][] duplicateElements() {
   @Test(dataProvider ="duplicateTest")
   public static void duplicateQueryParam(HashMap<String,String> duplicateElements,HashMap<String,String> duplicateElements2) {
 
-      RequestSpecification specification = given().log().all().queryParams(duplicateElements).queryParams(duplicateElements2);
+      RequestSpecification specification = given().queryParams(duplicateElements).queryParams(duplicateElements2);
       Response resp = specification.get();
   }
 }

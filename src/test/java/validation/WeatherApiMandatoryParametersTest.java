@@ -1,4 +1,4 @@
-package main;
+package validation;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -22,10 +22,11 @@ public class WeatherApiMandatoryParametersTest {
   @DataProvider(name = "dataForVariationTest")
   public static Object[][] getEventAPIInput() {
     HashMap<String, String> queryParams1 = new HashMap<String, String>();
-    queryParams1.put("app_id", "JIlgIjxb334PrWXpDC3w");
+
     HashMap<String, String> queryParams2 = new HashMap<String, String>();
     HashMap<String, String> queryParams3 = new HashMap<String, String>();
     HashMap<String, String> queryParams4 = new HashMap<String, String>();
+    queryParams1.put("app_id", "JIlgIjxb334PrWXpDC3w");
     queryParams1.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParams1.put("name", "Berlin");
     queryParams1.put("product", "observation");
@@ -45,17 +46,17 @@ public class WeatherApiMandatoryParametersTest {
     queryParams4.put("language", "polish");
 
     Object[][] retObjArr = {
-      {"Tc_1.1", queryParams1},
-      {"TC_1.2", queryParams2},
-      {"TC_1.3", queryParams3},
-      {"TC_1.4", queryParams4},
+      {"Tc_1.1 issue of mandatory parameter ", queryParams1},
+      {"TC_1.2 issue of mandatory parameter ", queryParams2},
+      {"TC_1.3 issue of mandatory parameter ", queryParams3},
+      {"TC_1.4 issue of mandatory parameter ", queryParams4},
     };
     return retObjArr;
   }
 
   @Test(dataProvider = "dataForVariationTest")
   public static void requiredMandatoryParameters(
-      String testNumber, HashMap<String,String> queryParams) {
+      String testNumber, HashMap<String, String> queryParams) {
 
     RequestSpecification requestSpecification = given().queryParams(queryParams);
 
