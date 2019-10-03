@@ -11,11 +11,13 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.testng.Assert.assertEquals;
 
 public class VariationsOfMandatoryParametersTest {
   @BeforeClass
-  public static void set() {
+  public void setBDefaultRequestParameters() {
+
     RestAssured.baseURI = "https://weather.api.here.com";
     RestAssured.basePath = "/weather/1.0/report.json";
   }
@@ -46,10 +48,10 @@ public class VariationsOfMandatoryParametersTest {
     HashMap<String, String> queryParams22 = new HashMap<String, String>();
 
     // Ok Tests!
-    queryParams1.put("app_id", "JIlgIjxb334PrWXpDC3w"); // good parameters
-    queryParams1.put("app_code", "QZvw9AhazmUb1tY3uX40DQ"); // good parameters
-    queryParams1.put("name", "Berlin"); // good parameters
-    queryParams1.put("product", "observation"); // good parameters
+    queryParams1.put("app_id", "JIlgIjxb334PrWXpDC3w");
+    queryParams1.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
+    queryParams1.put("name", "Berlin");
+    queryParams1.put("product", "observation");
 
     // authorization Tests//
 
@@ -70,7 +72,7 @@ public class VariationsOfMandatoryParametersTest {
     queryParams4.put("product", "observation");
     queryParams4.put("latitude", "52.5170365");
     queryParams4.put("longitude", "13.3888599"); //
-//mandatory parameter
+    // mandatory parameter
     queryParams5.put("App_id", "JIlgIjxb334PrWXpDC3w");
     queryParams5.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParams5.put("product", "observation");
@@ -184,28 +186,28 @@ public class VariationsOfMandatoryParametersTest {
     queryParams22.put("longitude", "0"); // int
 
     Object[][] retObjArr = {
-      {"Tc_1.1 -authorization problem", queryParams1},
-      {"TC_1.2-authorization problem", queryParams2},
-      {"TC_1.3-authorization problem", queryParams3},
-      {"TC_1.4-authorization problem", queryParams4},
-      {"TC_1.5-mandatory parameter", queryParams5},
-      {"TC_1.6-mandatory parameter", queryParams6},
-      {"Tc_1.7-authorization problem", queryParams7},
-      {"TC_1.8-authorization problem", queryParams8},
-      {"TC_1.9-authorization problem", queryParams9},
-      {"TC_1.10-mandatory parameter", queryParams10},
-      {"TC_1.11-mandatory parameter", queryParams11},
-      {"TC_1.12-mandatory parameter", queryParams12},
-      {"Tc_1.13-mandatory parameter", queryParams13},
-      {"TC_1.14-authorization problem", queryParams14},
-      {"TC_1.15-authorization problem", queryParams15},
-      {"TC_1.16-query parameter problem", queryParams16},
-      {"TC_1.17-query parameter problem", queryParams17},
-      {"TC_1.18-query parameter problem", queryParams18},
-      {"Tc_1.19-query parameter problem", queryParams19},
-      {"TC_1.20-query parameter problem", queryParams20},
-      {"TC_1.21-query parameter problem", queryParams21},
-      {"TC_1.22-query parameter problem", queryParams22},
+      {"Tc_1.1-Authorization problem", queryParams1},
+      {"TC_1.2-Authorization problem", queryParams2},
+      {"TC_1.3-Authorization problem", queryParams3},
+      {"TC_1.4-Authorization problem", queryParams4},
+      {"TC_1.5-Mandatory parameter problem", queryParams5},
+      {"TC_1.6-Mandatory parameter problem", queryParams6},
+      {"Tc_1.7-Authorization problem", queryParams7},
+      {"TC_1.8-Authorization problem", queryParams8},
+      {"TC_1.9-Authorization problem", queryParams9},
+      {"TC_1.10-Mandatory parameter problem", queryParams10},
+      {"TC_1.11-Mandatory parameter problem", queryParams11},
+      {"TC_1.12-Mandatory parameter problem", queryParams12},
+      {"Tc_1.13-Mandatory parameter problem", queryParams13},
+      {"TC_1.14-Authorization problem", queryParams14},
+      {"TC_1.15-Authorization problem", queryParams15},
+      {"TC_1.16-Query parameter problem", queryParams16},
+      {"TC_1.17-Query parameter problem", queryParams17},
+      {"TC_1.18-Query parameter problem", queryParams18},
+      {"Tc_1.19-Query parameter problem", queryParams19},
+      {"TC_1.20-Query parameter problem", queryParams20},
+      {"TC_1.21-Query parameter problem", queryParams21},
+      {"TC_1.22-Query parameter problem", queryParams22},
     };
     return retObjArr;
   }
@@ -215,28 +217,30 @@ public class VariationsOfMandatoryParametersTest {
       String testCaseNumber, HashMap<String, String> queryParam) {
     RequestSpecification specification = given().queryParams(queryParam);
     Response resp = specification.get();
-    assertEquals(resp.statusCode(), 200, testCaseNumber);
+    assertEquals(resp.statusCode(), SC_OK, testCaseNumber);
   }
-@DataProvider(name="duplicateTest")
-public Object[][] duplicateElements() {
-  HashMap<String, String> queryParams1 = new HashMap<String, String>();
-  HashMap<String, String> queryParams2 = new HashMap<String, String>();
-  queryParams1.put("app_id", "JIlgIjxb334PrWXpDC3w"); // good parameters
-  queryParams1.put("app_code", "QZvw9AhazmUb1tY3uX40DQ"); // good parameters
-  queryParams1.put("name", "Berlin"); // good parameters
-  queryParams1.put("product", "observation"); // good parameters
-  queryParams2.put("app_id", "JIlgIjxb334PrWXpDC3w"); // good parameters
-           Object[][] ret={
-                   {queryParams1,queryParams2},
 
-
-
+  @DataProvider(name = "duplicateTest")
+  public Object[][] duplicateElements() {
+    HashMap<String, String> queryParams1 = new HashMap<String, String>();
+    HashMap<String, String> queryParams2 = new HashMap<String, String>();
+    queryParams1.put("app_id", "JIlgIjxb334PrWXpDC3w"); // good parameters
+    queryParams1.put("app_code", "QZvw9AhazmUb1tY3uX40DQ"); // good parameters
+    queryParams1.put("name", "Berlin"); // good parameters
+    queryParams1.put("product", "observation"); // good parameters
+    queryParams2.put("app_id", "JIlgIjxb334PrWXpDC3w"); // good parameters
+    Object[][] ret = {
+      {queryParams1, queryParams2},
     };
-  return  ret;}
-  @Test(dataProvider ="duplicateTest")
-  public static void duplicateQueryParam(HashMap<String,String> duplicateElements,HashMap<String,String> duplicateElements2) {
+    return ret;
+  }
 
-      RequestSpecification specification = given().queryParams(duplicateElements).queryParams(duplicateElements2);
-      Response resp = specification.get();
+  @Test(dataProvider = "duplicateTest")
+  public void duplicateQueryParam(
+      HashMap<String, String> duplicateElements, HashMap<String, String> duplicateElements2) {
+//map inside
+    RequestSpecification specification =
+        given().queryParams(duplicateElements).queryParams(duplicateElements2);
+    Response resp = specification.get();
   }
 }
