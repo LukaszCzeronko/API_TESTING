@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.testng.Assert.assertEquals;
 
 public class WeatherApiMandatoryParametersTest {
@@ -62,6 +63,6 @@ public class WeatherApiMandatoryParametersTest {
 
     Response webResponse = requestSpecification.get();
 
-    assertEquals(webResponse.statusCode(), 200, testNumber);
+    assertEquals(webResponse.statusCode(), SC_OK, testNumber);
   }
 }
