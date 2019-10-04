@@ -8,4 +8,4 @@ In our project we want to do validation and functional tests to confirm that the
 
 # Test Execution
 Set Maven command line to :
-```clean install```
+```clean test```
