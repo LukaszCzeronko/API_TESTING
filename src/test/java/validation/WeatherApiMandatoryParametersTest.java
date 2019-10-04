@@ -6,9 +6,7 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.HashMap;
-
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.testng.Assert.assertEquals;
@@ -58,11 +56,8 @@ public class WeatherApiMandatoryParametersTest {
   @Test(dataProvider = "dataForVariationTest")
   public static void requiredMandatoryParameters(
       String testNumber, HashMap<String, String> queryParams) {
-
     RequestSpecification requestSpecification = given().queryParams(queryParams);
-
     Response webResponse = requestSpecification.get();
-
     assertEquals(webResponse.statusCode(), SC_OK, testNumber);
   }
 }
