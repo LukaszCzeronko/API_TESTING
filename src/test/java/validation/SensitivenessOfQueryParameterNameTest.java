@@ -1,25 +1,20 @@
 package validation;
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.HashMap;
-
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
-public class SensitivenessTestOfQueryParameterName {
+public class SensitivenessOfQueryParameterNameTest {
   @BeforeClass
   public void setBDefaultRequestParameters() {
-
     RestAssured.baseURI = "https://weather.api.here.com";
     RestAssured.basePath = "/weather/1.0/report.json";
   }
-
   @DataProvider(name = "sensitivenessOfQueryParameterName")
   public Object[][] queryParameterNameTest() {
     HashMap<String, String> queryParametersName1 = new HashMap<String, String>();
@@ -58,7 +53,7 @@ public class SensitivenessTestOfQueryParameterName {
     queryParametersName1.put("name", "Berlin");
     queryParametersName1.put("product", "observation");
 
-    queryParametersName2.put("app__id", "JIlgIjxb334PrWXpDC3w"); // app_id->app__id
+    queryParametersName2.put("app_ID", "JIlgIjxb334PrWXpDC3w"); // app_id->app_ID
     queryParametersName2.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParametersName2.put("name", "Berlin");
     queryParametersName2.put("product", "observation");
@@ -79,7 +74,7 @@ public class SensitivenessTestOfQueryParameterName {
     queryParametersName5.put("product", "observation");
 
     queryParametersName6.put("app_id", "JIlgIjxb334PrWXpDC3w");
-    queryParametersName6.put("app__code", "QZvw9AhazmUb1tY3uX40DQ"); // app_code->app__code
+    queryParametersName6.put("aPp_code", "QZvw9AhazmUb1tY3uX40DQ"); // app_code->aPp_code
     queryParametersName6.put("name", "Berlin");
     queryParametersName6.put("product", "observation");
 
@@ -134,13 +129,13 @@ public class SensitivenessTestOfQueryParameterName {
     queryParametersName15.put("app_id", "JIlgIjxb334PrWXpDC3w");
     queryParametersName15.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParametersName15.put("latitude", "11");
-    queryParametersName15.put("laTitude", "12"); // longitude->laTitude
+    queryParametersName15.put("loNgitude", "12"); // longitude->loNgitude
     queryParametersName15.put("product", "observation");
 
     queryParametersName16.put("app_id", "JIlgIjxb334PrWXpDC3w");
     queryParametersName16.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParametersName16.put("latitude", "11");
-    queryParametersName16.put("laTitude", "12"); // longitude->laTitude
+    queryParametersName16.put("longitude ", "12"); // longitude->longitude
     queryParametersName16.put("product", "observation");
 
     queryParametersName17.put("app_id", "JIlgIjxb334PrWXpDC3w");
@@ -150,7 +145,7 @@ public class SensitivenessTestOfQueryParameterName {
 
     queryParametersName18.put("app_id", "JIlgIjxb334PrWXpDC3w");
     queryParametersName18.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
-    queryParametersName18.put("zip-code", "98343"); // zipcode->zip-code
+    queryParametersName18.put("zipCode", "98343"); // zipcode->zipCode
     queryParametersName18.put("product", "observation");
 
     queryParametersName19.put("app_id", "JIlgIjxb334PrWXpDC3w");
@@ -173,19 +168,19 @@ public class SensitivenessTestOfQueryParameterName {
     queryParametersName22.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParametersName22.put("name", "Berlin");
     queryParametersName22.put("product", "observation");
-    queryParametersName22.put("one_observation", "true"); // oneobservation->one_observation
+    queryParametersName22.put("oneobserVation", "true"); // oneobservation->oneobserVation
 
     queryParametersName23.put("app_id", "JIlgIjxb334PrWXpDC3w");
     queryParametersName23.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParametersName23.put("name", "Berlin");
     queryParametersName23.put("product", "observation");
-    queryParametersName23.put("metrics", "true"); // metric->metrics
+    queryParametersName23.put("metRics", "true"); // metric->metRic
 
     queryParametersName24.put("app_id", "JIlgIjxb334PrWXpDC3w");
     queryParametersName24.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParametersName24.put("name", "Berlin");
     queryParametersName24.put("product", "observation");
-    queryParametersName24.put("Metric", "observation"); // metric->Metric
+    queryParametersName24.put("Metric", "true"); // metric->Metric
 
     queryParametersName25.put("app_id", "JIlgIjxb334PrWXpDC3w");
     queryParametersName25.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
@@ -203,7 +198,7 @@ public class SensitivenessTestOfQueryParameterName {
     queryParametersName27.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
     queryParametersName27.put("name", "Berlin");
     queryParametersName27.put("product", "observation");
-    queryParametersName27.put("languag", "polish"); // language->languag
+    queryParametersName27.put("LANGUAGe", "polish"); // language->LANGUAGe
 
     queryParametersName28.put("app_id", "JIlgIjxb334PrWXpDC3w");
     queryParametersName28.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
