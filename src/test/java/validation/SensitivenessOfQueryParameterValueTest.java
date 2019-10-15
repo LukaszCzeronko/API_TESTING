@@ -9,7 +9,7 @@ import java.util.HashMap;
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
-public class SensitivenessOfQueryParameterValue {
+public class SensitivenessOfQueryParameterValueTest {
   @BeforeClass
   public void setBDefaultRequestParameters() {
     RestAssured.baseURI = "https://weather.api.here.com";
@@ -86,7 +86,7 @@ public class SensitivenessOfQueryParameterValue {
 
     queryParametersName9.put("app_id", "JIlgIjxb334PrWXpDC3w");
     queryParametersName9.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
-    queryParametersName9.put("name", "BERLIN."); // Berlin->BERLIN
+    queryParametersName9.put("name", "BERLIN"); // Berlin->BERLIN
     queryParametersName9.put("product", "observation");
 
     queryParametersName11.put("app_id", "JIlgIjxb334PrWXpDC3w");
