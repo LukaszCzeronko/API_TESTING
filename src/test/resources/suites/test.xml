@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Weather API suite">
+
+    <test name="All API validation tests">
+        <classes>
+            <class name="validation.DuplicateTest"/>
+            <class name="validation.HttpMethodsTest"/>
+            <class name="validation.SensitivenessOfQueryParameterNameTest"/>
+            <class name="validation.SensitivenessOfQueryParameterValueTest"/>
+            <class name="validation.WeatherApiMandatoryParametersTest"/>
+        </classes>
+    </test>
+
+</suite>
