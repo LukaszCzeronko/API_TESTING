@@ -1,53 +1,47 @@
 package validation;
 
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
 @Slf4j
-public class SensitivenessOfQueryParameterValueTest {
-    @BeforeClass
-    public void setBDefaultRequestParameters() {
-        RestAssured.baseURI = "https://weather.api.here.com";
-        RestAssured.basePath = "/weather/1.0/report.json";
-    }
+public class SensitivenessOfQueryParameterValueTest extends WeatherApiTestBase {
 
     @DataProvider(name = "sensitivenessOfQueryParameterValue")
     public Object[][] queryParameterNameValue() {
-        HashMap<String, String> queryParametersName1 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName2 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName3 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName4 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName5 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName6 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName7 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName8 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName9 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName11 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName12 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName13 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName14 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName15 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName16 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName17 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName18 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName19 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName20 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName21 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName22 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName23 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName24 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName25 = new HashMap<String, String>();
-        HashMap<String, String> queryParametersName26 = new HashMap<String, String>();
+        Map<String, String> queryParametersName1 = new HashMap<>();
+        Map<String, String> queryParametersName2 = new HashMap<>();
+        Map<String, String> queryParametersName3 = new HashMap<>();
+        Map<String, String> queryParametersName4 = new HashMap<>();
+        Map<String, String> queryParametersName5 = new HashMap<>();
+        Map<String, String> queryParametersName6 = new HashMap<>();
+        Map<String, String> queryParametersName7 = new HashMap<>();
+        Map<String, String> queryParametersName8 = new HashMap<>();
+        Map<String, String> queryParametersName9 = new HashMap<>();
+        Map<String, String> queryParametersName11 = new HashMap<>();
+        Map<String, String> queryParametersName12 = new HashMap<>();
+        Map<String, String> queryParametersName13 = new HashMap<>();
+        Map<String, String> queryParametersName14 = new HashMap<>();
+        Map<String, String> queryParametersName15 = new HashMap<>();
+        Map<String, String> queryParametersName16 = new HashMap<>();
+        Map<String, String> queryParametersName17 = new HashMap<>();
+        Map<String, String> queryParametersName18 = new HashMap<>();
+        Map<String, String> queryParametersName19 = new HashMap<>();
+        Map<String, String> queryParametersName20 = new HashMap<>();
+        Map<String, String> queryParametersName21 = new HashMap<>();
+        Map<String, String> queryParametersName22 = new HashMap<>();
+        Map<String, String> queryParametersName23 = new HashMap<>();
+        Map<String, String> queryParametersName24 = new HashMap<>();
+        Map<String, String> queryParametersName25 = new HashMap<>();
+        Map<String, String> queryParametersName26 = new HashMap<>();
 
         queryParametersName1.put("app_id", "JIlgIjxb334PrWXpDc3w"); // JIlgIjxb334PrWXpDC3w->jIlgIjxb334PrWXpDc3W
         queryParametersName1.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
