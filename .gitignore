@@ -110,3 +110,5 @@ fabric.properties
 
 /.idea/
 /API_TESTING.iml
+/api.test.iml
+/.allure
