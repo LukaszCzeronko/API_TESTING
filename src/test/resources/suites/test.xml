@@ -10,6 +10,9 @@
             <class name="validation.SensitivenessOfQueryParameterNameTest"/>
             <class name="validation.SensitivenessOfQueryParameterValueTest"/>
             <class name="validation.WeatherApiMandatoryParametersTest"/>
+            <class name="validation.AuthenticationTest"/>
+            <class name="validation.DateFormatTest"/>
+            <class name="validation.Wgs84CompliantFormatTest"/>
         </classes>
     </test>
 

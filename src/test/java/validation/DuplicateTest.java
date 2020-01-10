@@ -1,5 +1,8 @@
 package validation;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
@@ -12,6 +15,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
+@Epic("Query parameters tests")
 public class DuplicateTest extends WeatherApiTestBase {
 
     private Map<String, String> baseQueryParameters = new HashMap<>();
@@ -51,6 +55,8 @@ public class DuplicateTest extends WeatherApiTestBase {
         };
     }
 
+    @Feature("Supported values test")
+    @Story("Duplicated query parameters")
     @Test(dataProvider = "duplicateTestFirstCase")
     public void duplicateQueryParams(String testCaseNumber, String paramName, String paramValue, int statusCode) {
 
@@ -61,12 +67,13 @@ public class DuplicateTest extends WeatherApiTestBase {
     }
 
     // Second Case: wrong app_id ap_code in first place
+    @Feature("Supported values test")
+    @Story("Duplicated query parameters")
     @Test(dataProvider = "duplicateTestSecondCase")
     public void duplicateQueryParam(String testCaseNumber, String paramName, String paramValue, int statusCode) {
-
         RequestSpecification specificationQueryParam =
                 given().queryParam(paramName, paramValue).queryParams(baseQueryParameters);
-        Response respQueryParamsFirst = specificationQueryParam.log().all().get();
+        Response respQueryParamsFirst = specificationQueryParam.get();
         Assert.assertEquals(
                 respQueryParamsFirst.statusCode(), statusCode, testCaseNumber + " Wrong status code returned");
     }

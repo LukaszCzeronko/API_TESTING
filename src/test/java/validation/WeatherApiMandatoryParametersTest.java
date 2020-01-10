@@ -1,5 +1,6 @@
 package validation;
 
+import io.qameta.allure.Epic;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.DataProvider;
@@ -12,6 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.testng.Assert.assertEquals;
 
+@Epic("Query parameters tests")
 public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
 
     @DataProvider(name = "dataForVariationTest")
@@ -51,7 +53,7 @@ public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
     }
 
     @Test(dataProvider = "dataForVariationTest")
-    public static void requiredMandatoryParameters(String testNumber, Map<String, String> queryParams) {
+    public void requiredMandatoryParameters(String testNumber, Map<String, String> queryParams) {
         RequestSpecification requestSpecification = given().queryParams(queryParams);
         Response webResponse = requestSpecification.get();
         assertEquals(webResponse.statusCode(), SC_OK, testNumber);

@@ -1,5 +1,7 @@
 package validation;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
@@ -9,6 +11,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.assertEquals;
 
+@Epic("Security testing")
 public class HttpMethodsTest extends WeatherApiTestBase {
     private static final String BASE_QUERY_PARAMETERS =
             "?app_id=JIlgIjxb334PrWXpDC3w&app_code=QZvw9AhazmUb1tY3uX40DQ&product=observation&name=Berlin";
@@ -34,6 +37,7 @@ public class HttpMethodsTest extends WeatherApiTestBase {
         };
     }
 
+    @Feature("HTTP methods tests")
     @Test(dataProvider = "dataStatusCodes")
     public void testHttpMethods(String testCaseNumber, String methodName, int statusCode) {
         Response response = given().log().all().request(methodName, baseURI + basePath);

@@ -1,5 +1,8 @@
 package validation;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.DataProvider;
@@ -11,6 +14,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
+@Epic("Query parameters tests")
 public class SensitivenessOfQueryParameterNameTest extends WeatherApiTestBase {
 
     @DataProvider(name = "sensitivenessOfQueryParameterName")
@@ -168,6 +172,8 @@ public class SensitivenessOfQueryParameterNameTest extends WeatherApiTestBase {
         };
     }
 
+    @Feature("Case sensitiveness test")
+    @Story("Query name sensitiveness test ")
     @Test(dataProvider = "sensitivenessOfQueryParameterName")
     public void queryParameterNameTest(
             String message, HashMap<String, String> queryParameters, int statusCode) {
