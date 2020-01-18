@@ -1,6 +1,8 @@
 package validation;
 
 import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.DataProvider;
@@ -52,10 +54,13 @@ public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
         };
     }
 
+    @Feature("Mandatory parameters test")
     @Test(dataProvider = "dataForVariationTest")
+    @Step("Verify proper functioning for correct mandatory parameters")
     public void requiredMandatoryParameters(String testNumber, Map<String, String> queryParams) {
         RequestSpecification requestSpecification = given().queryParams(queryParams);
         Response webResponse = requestSpecification.get();
         assertEquals(webResponse.statusCode(), SC_OK, testNumber);
+        headersReport(webResponse);
     }
 }

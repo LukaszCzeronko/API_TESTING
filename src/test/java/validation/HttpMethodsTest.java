@@ -2,6 +2,7 @@ package validation;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
@@ -36,11 +37,15 @@ public class HttpMethodsTest extends WeatherApiTestBase {
                 {"TC_2.8", "PATCH", 405}
         };
     }
+//change test name to "CHANGED_NAME"
 
     @Feature("HTTP methods tests")
     @Test(dataProvider = "dataStatusCodes")
+    @Step("Verify that HTTP response code for method {methodName} is equal to {statusCode} ")
     public void testHttpMethods(String testCaseNumber, String methodName, int statusCode) {
-        Response response = given().log().all().request(methodName, baseURI + basePath);
+        Response response = given().request(methodName, baseURI + basePath);
         assertEquals(response.statusCode(), statusCode, testCaseNumber + " Wrong response status code.");
+        siteAddress();
+        headersReport(response);
     }
 }

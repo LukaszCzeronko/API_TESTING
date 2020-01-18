@@ -2,6 +2,7 @@ package validation;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
@@ -74,16 +75,17 @@ public class AuthenticationTest extends WeatherApiTestBase {
                 {"TC_3.1", queryParams1, 200}, {"TC_3.2", queryParams2, 401}, {"TC_3.3", queryParams3, 401}, {"TC_3.4", queryParams4, 401}, {"TC_3.5", queryParams5, 401},
                 {"TC_3.6", queryParams6, 401}, {"TC_3.7", queryParams7, 401}, {"TC_3.8", queryParams8, 401}, {"TC_3.9", queryParams9, 401}, {"TC_3.10", queryParams10, 401}
         };
-
     }
 
     @Feature("Authentication tests")
     @Test(dataProvider = "loginData")
+    @Step("Verify that HTTP code for authentication parameters {parameters} is equal to {statusCode}")
     public void authenticationTest(String testCaseNumber, HashMap<String, String> parameters, int statusCode) {
         RequestSpecification specificationQueryParam =
                 given().queryParams(parameters).queryParams(baseQueryParameters);
         Response respQueryParamsFirst = specificationQueryParam.get();
         assertEquals(respQueryParamsFirst.statusCode(), statusCode, testCaseNumber);
-
+        printBaseDate(baseQueryParameters);
+        headersReport(respQueryParamsFirst);
     }
 }

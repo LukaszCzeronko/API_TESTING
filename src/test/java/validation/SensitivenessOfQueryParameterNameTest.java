@@ -2,6 +2,7 @@ package validation;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -175,10 +176,13 @@ public class SensitivenessOfQueryParameterNameTest extends WeatherApiTestBase {
     @Feature("Case sensitiveness test")
     @Story("Query name sensitiveness test ")
     @Test(dataProvider = "sensitivenessOfQueryParameterName")
+    @Step("Verify sensitiveness of parameter name {queryParameters} and assert that HTTP response code is equal to {statusCode}")
     public void queryParameterNameTest(
             String message, HashMap<String, String> queryParameters, int statusCode) {
         RequestSpecification specification = given().queryParams(queryParameters);
         Response resp = specification.get();
         assertEquals(resp.statusCode(), statusCode, message);
+        printBaseDate(queryParameters);
+        headersReport(resp);
     }
 }

@@ -1,6 +1,7 @@
 package validation;
 
 import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -49,16 +50,20 @@ public class DateFormatTest extends WeatherApiTestBase {
     @Feature("Supported values test")
     @Story("Date format test")
     @Test(dataProvider = "dateNotSupported")
+    @Step("Verify if the date for the day {day} are not supported")
     public void dateNotSupportedTest(String testCaseNumber, int day) {
         given().queryParam("hourlydate", initialData.plus(Period.ofDays(day)).toString()).queryParams(baseQueryParameters).
                 get().then().assertThat().body("hourlyForecasts.forecastLocation.forecast[1]", equalTo(null));
+        printBaseDate(baseQueryParameters);
     }
 
     @Feature("Supported values test")
     @Story("Date format test")
     @Test(dataProvider = "dateSupported")
+    @Step("Verify if the date for the day {day} are supported")
     public void dateSupportedTest(String testCaseNumber, int day) {
         given().queryParam("hourlydate", initialData.plus(Period.ofDays(day)).toString()).queryParams(baseQueryParameters).
                 get().then().assertThat().body("hourlyForecasts.forecastLocation.forecast[0]", is(notNullValue()));
+        printBaseDate(baseQueryParameters);
     }
 }
