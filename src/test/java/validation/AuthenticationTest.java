@@ -84,7 +84,7 @@ public class AuthenticationTest extends WeatherApiTestBase {
 
     @Feature("Authentication tests")
     @Test(dataProvider = "loginData")
-    @Description("Verify that HTTP code for authentication parameters {parameters} is equal to {statusCode}")
+    @Description("Validates login authentication")
     public void authenticationTest(String testCaseNumber, HashMap<String, String> parameters, int statusCode) {
         Response response = sendRequest(Method.GET, baseQueryParameters, parameters);
         softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);

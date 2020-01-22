@@ -1,24 +1,21 @@
 package validation;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Step;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
-
 @Epic("Query parameters tests")
 public class Wgs84CompliantFormatTest extends WeatherApiTestBase {
     private Map<String, String> baseQueryParameters = new HashMap<>();
+    SoftAssert softAssert;
 
     @BeforeClass
     @Override
@@ -82,14 +79,19 @@ public class Wgs84CompliantFormatTest extends WeatherApiTestBase {
         };
     }
 
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
+    }
+
     @Feature("Supported values test")
     @Story("WGS-84 compliant format test")
     @Test(dataProvider = "coordinates")
-    @Step("Verify compatibility with WGS-84 compliant format for values {parameters}, proper status code is equal to {statusCode} ")
+    @Description("Verify compatibility with WGS-84 compliant format for values {parameters}, proper status code is equal to {statusCode}")
+    @Step("Verify compatibility with WGS-84 compliant format.")
     public void wgs84Format(String testCaseNumber, HashMap<String, String> parameters, int statusCode) {
-        RequestSpecification specificationQueryParam =
-                given().queryParams(baseQueryParameters).queryParams(parameters);
-        Response respQueryParamsFirst = specificationQueryParam.get();
-        assertEquals(respQueryParamsFirst.statusCode(), statusCode, testCaseNumber);
+        Response response = sendRequest(Method.GET, baseQueryParameters, parameters);
+        softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);
+        softAssert.assertAll();
     }
 }

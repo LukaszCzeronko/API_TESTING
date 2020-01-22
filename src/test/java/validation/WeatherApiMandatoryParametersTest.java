@@ -1,22 +1,22 @@
 package validation;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
-import static org.apache.http.HttpStatus.SC_OK;
-import static org.testng.Assert.assertEquals;
-
 @Epic("Query parameters tests")
 public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
+    SoftAssert softAssert;
 
     @DataProvider(name = "dataForVariationTest")
     public Object[][] getEventAPIInput() {
@@ -47,19 +47,25 @@ public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
         queryParams4.put("language", "polish");
 
         return new Object[][]{
-                {"Tc_1.1", queryParams1},
-                {"TC_1.2", queryParams2},
-                {"TC_1.3 ", queryParams3},
-                {"TC_1.4", queryParams4},
+                {"Tc_1.1", queryParams1, 200},
+                {"TC_1.2", queryParams2, 200},
+                {"TC_1.3 ", queryParams3, 200},
+                {"TC_1.4", queryParams4, 200},
         };
+    }
+
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
     }
 
     @Feature("Mandatory parameters test")
     @Test(dataProvider = "dataForVariationTest")
-    @Step("Verify proper functioning for correct mandatory parameters")
-    public void requiredMandatoryParameters(String testNumber, Map<String, String> queryParams) {
-        RequestSpecification requestSpecification = given().queryParams(queryParams);
-        Response webResponse = requestSpecification.get();
-        assertEquals(webResponse.statusCode(), SC_OK, testNumber);
+    @Description("Verify proper functioning for correct mandatory parameters")
+    @Step("Validates mandatory parameters")
+    public void requiredMandatoryParameters(String testNumber, Map<String, String> queryParams, int statusCode) {
+        Response response = sendRequest(Method.GET, queryParams);
+        softAssert.assertEquals(response.statusCode(), statusCode, testNumber);
+        softAssert.assertAll();
     }
 }

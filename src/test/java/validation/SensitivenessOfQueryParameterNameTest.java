@@ -1,22 +1,19 @@
 package validation;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Step;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
-
 @Epic("Query parameters tests")
 public class SensitivenessOfQueryParameterNameTest extends WeatherApiTestBase {
+    SoftAssert softAssert;
 
     @DataProvider(name = "sensitivenessOfQueryParameterName")
     public Object[][] queryParameterNameTest() {
@@ -173,14 +170,21 @@ public class SensitivenessOfQueryParameterNameTest extends WeatherApiTestBase {
         };
     }
 
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
+    }
+
     @Feature("Case sensitiveness test")
     @Story("Query name sensitiveness test ")
     @Test(dataProvider = "sensitivenessOfQueryParameterName")
-    @Step("Verify sensitiveness of parameter name {queryParameters} and assert that HTTP response code is equal to {statusCode}")
+    @Description("Verify sensitiveness of parameter name {queryParameters} and assert that HTTP response code is equal to {statusCode}")
+    @Step("Verify sensitiveness of parameter name")
     public void queryParameterNameTest(
             String message, HashMap<String, String> queryParameters, int statusCode) {
-        RequestSpecification specification = given().queryParams(queryParameters);
-        Response resp = specification.get();
-        assertEquals(resp.statusCode(), statusCode, message);
+        Response response = sendRequest(Method.GET, queryParameters);
+        softAssert.assertEquals(response.statusCode(), statusCode, message);
+        softAssert.assertAll();
+
     }
 }

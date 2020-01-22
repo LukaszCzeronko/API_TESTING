@@ -1,22 +1,21 @@
 package validation;
 
 import io.qameta.allure.*;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
-
 @Epic("Query parameters tests")
 public class DuplicateTest extends WeatherApiTestBase {
-    AllureLifecycle lifecycle = Allure.getLifecycle();
     private Map<String, String> baseQueryParameters = new HashMap<>();
+    SoftAssert softAssert;
 
     @BeforeClass
     @Override
@@ -37,45 +36,25 @@ public class DuplicateTest extends WeatherApiTestBase {
                 {"TC_6.4", "app_code", "QZve9AhazmUb1tY3uX40DQ", 200},
                 {"TC_6.5", "name", "Berlin", 200},
                 {"TC_6.6", "name", "Paris", 200},
-                {"TC_6.7", "product", "observation", 200}
+                {"TC_6.7", "product", "observation", 200},
+                {"TC_6.8", "app_id", "JIlgIjxb334PrWXpDC3w", 200},
         };
     }
 
-    @DataProvider(name = "duplicateTestSecondCase")
-    public Object[][] duplicateElementsSecondCase() {
-        return new Object[][]{
-                {"TC_6.8", "app_id", "JIlgIjxb334PrWXpDC3w", 200},
-                {"TC_6.9", "app_id", "JIlgIjxb334PrkXpDC3w", 401},
-                {"TC_6.10", "app_code", "QZve9AhazmUb1tY3uX40DQ", 401},
-                {"TC_6.11", "name", "Berlin", 200},
-                {"TC_6.12", "name", "Paris", 200},
-                {"TC_6.13", "product", "observation", 201}
-        };
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
     }
 
     @Feature("Supported values test")
     @Story("Duplicated query parameters")
     @Test(dataProvider = "duplicateTestFirstCase")
-    @Step("Verify that duplicated {paramName} with value {paramValue} have HTTP code {statusCode}")
+    @Description("Verify that duplicated {paramName} with value {paramValue} have HTTP code {statusCode}")
+    @Step("Validates duplicated parameters")
     public void duplicateQueryParams(String testCaseNumber, String paramName, String paramValue, int statusCode) {
-        RequestSpecification specificationQueryParams =
-                given().queryParams(baseQueryParameters).queryParam(paramName, paramValue);
-        Response resp = specificationQueryParams.get();
-        Assert.assertEquals(resp.statusCode(), statusCode, testCaseNumber + " Wrong status code returned");
+        Response response = sendRequest(Method.GET, baseQueryParameters, paramName, paramValue);
+        softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);
+        softAssert.assertAll();
     }
 
-    // Second Case: wrong app_id ap_code in first place
-    @Feature("Supported values test")
-    @Story("Duplicated query parameters")
-    @Test(dataProvider = "duplicateTestSecondCase")
-    @Step("Verify that duplicated {paramName} with value {paramValue} have HTTP code {statusCode}")
-    public void duplicateQueryParam(String testCaseNumber, String paramName, String paramValue, int statusCode) {
-        RequestSpecification specificationQueryParam =
-                given().queryParam(paramName, paramValue).queryParams(baseQueryParameters);
-        Response respQueryParamsFirst = specificationQueryParam.get();
-        Assert.assertEquals(
-                respQueryParamsFirst.statusCode(), statusCode, testCaseNumber + " Wrong status code returned");
-        lifecycle.updateTestCase(testResult -> testResult.setName("CHANGED_NAME"));
-
-    }
 }

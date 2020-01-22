@@ -32,7 +32,7 @@ public class ExtendedSoftAssert extends SoftAssert {
         }
     }
 
-    @Step("Response validation result ")
+    @Step("Response validation result")
     public void assertAll() {
         getHtmlTable(assertionResults.toString());
         if (!m_errors.isEmpty()) {

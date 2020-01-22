@@ -13,6 +13,8 @@ import org.testng.annotations.BeforeClass;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
@@ -25,13 +27,8 @@ public class WeatherApiTestBase {
     public void setUpConstants() {
         baseURI = "https://weather.api.here.com";
         basePath = "/weather/1.0/report.json";
-        siteAddress();
     }
 
-    @Attachment
-    String siteAddress() {
-        return baseURI + basePath;
-    }
 
     @Step("Sending {methodType} request")
     Response sendRequest(Method methodType, Map<String, String>... queryParameters) {
@@ -39,6 +36,7 @@ public class WeatherApiTestBase {
         for (Map<String, String> queryParameter : queryParameters) {
             newRequestSpecification.queryParams(queryParameter);
         }
+
         ByteArrayOutputStream responseOutputStream = new ByteArrayOutputStream();
         ByteArrayOutputStream requestOutputStream = new ByteArrayOutputStream();
         PrintStream requestPs = new PrintStream(requestOutputStream, true);
@@ -52,6 +50,29 @@ public class WeatherApiTestBase {
         requestDetails(requestDetails);
         responseDetails(responseDetails);
         return response;
+    }
+
+    Response sendRequest(Method methodType, Map<String, String> queryParameters, String parameter, String value) {
+        RequestSpecification newRequestSpecification;
+        newRequestSpecification = given().queryParams(queryParameters).queryParam(parameter, value);
+        ByteArrayOutputStream responseOutputStream = new ByteArrayOutputStream();
+        ByteArrayOutputStream requestOutputStream = new ByteArrayOutputStream();
+        PrintStream requestPs = new PrintStream(requestOutputStream, true);
+        PrintStream responsePs = new PrintStream(responseOutputStream, true);
+        RequestLoggingFilter requestLoggingFilter = new RequestLoggingFilter(requestPs);
+        ResponseLoggingFilter responseLoggingFilter = new ResponseLoggingFilter(responsePs);
+        newRequestSpecification.filters(requestLoggingFilter, responseLoggingFilter);
+        Response response = newRequestSpecification.request(methodType);
+        String requestDetails = new String(requestOutputStream.toByteArray());
+        String responseDetails = new String(responseOutputStream.toByteArray());
+        requestDetails(requestDetails);
+        responseDetails(responseDetails);
+        return response;
+    }
+
+    String date(int day) {
+        LocalDate initialData = LocalDate.now();
+        return initialData.plus(Period.ofDays(day)).toString();
     }
 
     @Attachment("Response_details")

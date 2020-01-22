@@ -1,49 +1,61 @@
 package validation;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
-import io.restassured.RestAssured;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
-import static io.restassured.RestAssured.*;
-import static org.testng.Assert.assertEquals;
+import java.util.HashMap;
+import java.util.Map;
 
 @Epic("Security testing")
 public class HttpMethodsTest extends WeatherApiTestBase {
-    private static final String BASE_QUERY_PARAMETERS =
-            "?app_id=JIlgIjxb334PrWXpDC3w&app_code=QZvw9AhazmUb1tY3uX40DQ&product=observation&name=Berlin";
+    private Map<String, String> baseQueryParameters = new HashMap<>();
+    SoftAssert softAssert;
 
     @BeforeClass
     @Override
     public void setUpConstants() {
         super.setUpConstants();
-        RestAssured.basePath += BASE_QUERY_PARAMETERS;
+        baseQueryParameters.put("app_id", "JIlgIjxb334PrWXpDC3w");
+        baseQueryParameters.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
+        baseQueryParameters.put("name", "Berlin");
+        baseQueryParameters.put("product", "forecast_hourly");
     }
 
     @DataProvider(name = "dataStatusCodes")
     public Object[][] setCodeStatus() {
         return new Object[][]{
-                {"TC_2.1", "GET", 200},
-                {"TC_2.2", "POST", 405},
-                {"TC_2.3", "DELETE", 405},
-                {"TC_2.4", "OPTIONS", 405},
-                {"TC_2.5", "PUT", 405},
-                {"TC_2.6", "HEAD", 200},
-                {"TC_2.7", "TRACE", 403},
-                {"TC_2.8", "PATCH", 405}
+                {"TC_2.1", Method.GET, 200},
+                {"TC_2.2", Method.POST, 405},
+                {"TC_2.3", Method.DELETE, 405},
+                {"TC_2.4", Method.OPTIONS, 405},
+                {"TC_2.5", Method.PUT, 405},
+                {"TC_2.6", Method.HEAD, 200},
+                {"TC_2.7", Method.TRACE, 403},
+                {"TC_2.8", Method.PATCH, 405}
         };
     }
-//change test name to "CHANGED_NAME"
+
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
+    }
 
     @Feature("HTTP methods tests")
     @Test(dataProvider = "dataStatusCodes")
-    @Step("Verify that HTTP response code for method {methodName} is equal to {statusCode} ")
-    public void testHttpMethods(String testCaseNumber, String methodName, int statusCode) {
-        Response response = given().request(methodName, baseURI + basePath);
-        assertEquals(response.statusCode(), statusCode, testCaseNumber + " Wrong response status code.");
+    @Description("Verify that HTTP response code for method {methodName} is equal to {statusCode}")
+    @Step("Validates HTTP response code")
+    public void testHttpMethods(String testCaseNumber, Method methodName, int statusCode) {
+        Response response = sendRequest(methodName, baseQueryParameters);
+        softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);
+        softAssert.assertAll();
     }
 }

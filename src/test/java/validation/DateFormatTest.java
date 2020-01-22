@@ -1,5 +1,6 @@
 package validation;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
@@ -11,18 +12,12 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.HashMap;
 import java.util.Map;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
 
 public class DateFormatTest extends WeatherApiTestBase {
 
     private Map<String, String> baseQueryParameters = new HashMap<>();
-    LocalDate initialData = LocalDate.now();
     SoftAssert softAssert;
 
     @BeforeClass
@@ -63,17 +58,20 @@ public class DateFormatTest extends WeatherApiTestBase {
     @Test(dataProvider = "dateNotSupported")
     @Step("Verify if the date for the day {day} are not supported")
     public void dateNotSupportedTest(String testCaseNumber, int day) {
-        Response response = sendRequest(Method.GET, baseQueryParameters);
-        given().queryParam("hourlydate", initialData.plus(Period.ofDays(day)).toString()).queryParams(baseQueryParameters).
-                get().then().assertThat().body("hourlyForecasts.forecastLocation.forecast[1]", equalTo(null));
+        Response response = sendRequest(Method.GET, baseQueryParameters, "hourlydate", date(day));
+        softAssert.assertFalse(response.getBody().asString().contains("temperature"), testCaseNumber);
+        softAssert.assertAll();
+
     }
 
     @Feature("Supported values test")
     @Story("Date format test")
     @Test(dataProvider = "dateSupported")
-    @Step("Verify if the date for the day {day} are supported")
+    @Description("Verify if the date for the day {day} are supported")
+    @Step("Validates date format system")
     public void dateSupportedTest(String testCaseNumber, int day) {
-        given().queryParam("hourlydate", initialData.plus(Period.ofDays(day)).toString()).queryParams(baseQueryParameters).
-                get().then().assertThat().body("hourlyForecasts.forecastLocation.forecast[0]", is(notNullValue()));
+        Response response = sendRequest(Method.GET, baseQueryParameters, "hourlydate", date(day));
+        softAssert.assertTrue(response.getBody().asString().contains("temperature"), testCaseNumber);
+        softAssert.assertAll();
     }
 }
