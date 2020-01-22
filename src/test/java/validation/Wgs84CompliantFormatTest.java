@@ -91,7 +91,5 @@ public class Wgs84CompliantFormatTest extends WeatherApiTestBase {
                 given().queryParams(baseQueryParameters).queryParams(parameters);
         Response respQueryParamsFirst = specificationQueryParam.get();
         assertEquals(respQueryParamsFirst.statusCode(), statusCode, testCaseNumber);
-        printBaseDate(parameters);
-        headersReport(respQueryParamsFirst);
     }
 }

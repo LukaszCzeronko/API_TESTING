@@ -45,7 +45,5 @@ public class HttpMethodsTest extends WeatherApiTestBase {
     public void testHttpMethods(String testCaseNumber, String methodName, int statusCode) {
         Response response = given().request(methodName, baseURI + basePath);
         assertEquals(response.statusCode(), statusCode, testCaseNumber + " Wrong response status code.");
-        siteAddress();
-        headersReport(response);
     }
 }

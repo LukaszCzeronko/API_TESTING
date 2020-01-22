@@ -1,24 +1,24 @@
 package validation;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Step;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
 
 @Epic("Security testing")
 public class AuthenticationTest extends WeatherApiTestBase {
 
     private Map<String, String> baseQueryParameters = new HashMap<>();
+    SoftAssert softAssert;
 
     @BeforeClass
     @Override
@@ -77,15 +77,17 @@ public class AuthenticationTest extends WeatherApiTestBase {
         };
     }
 
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
+    }
+
     @Feature("Authentication tests")
     @Test(dataProvider = "loginData")
-    @Step("Verify that HTTP code for authentication parameters {parameters} is equal to {statusCode}")
+    @Description("Verify that HTTP code for authentication parameters {parameters} is equal to {statusCode}")
     public void authenticationTest(String testCaseNumber, HashMap<String, String> parameters, int statusCode) {
-        RequestSpecification specificationQueryParam =
-                given().queryParams(parameters).queryParams(baseQueryParameters);
-        Response respQueryParamsFirst = specificationQueryParam.get();
-        assertEquals(respQueryParamsFirst.statusCode(), statusCode, testCaseNumber);
-        printBaseDate(baseQueryParameters);
-        headersReport(respQueryParamsFirst);
+        Response response = sendRequest(Method.GET, baseQueryParameters, parameters);
+        softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);
+        softAssert.assertAll();
     }
 }

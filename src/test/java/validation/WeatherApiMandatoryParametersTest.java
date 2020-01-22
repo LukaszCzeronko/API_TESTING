@@ -61,6 +61,5 @@ public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
         RequestSpecification requestSpecification = given().queryParams(queryParams);
         Response webResponse = requestSpecification.get();
         assertEquals(webResponse.statusCode(), SC_OK, testNumber);
-        headersReport(webResponse);
     }
 }

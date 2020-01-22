@@ -217,9 +217,5 @@ public class SensitivenessOfQueryParameterValueTest extends WeatherApiTestBase {
         RequestSpecification specification = given().queryParams(queryParameters);
         Response resp = specification.get();
         assertEquals(resp.statusCode(), statusCode, message);
-        printBaseDate(queryParameters);
-        headersReport(resp);
-
-
     }
 }

@@ -1,9 +1,6 @@
 package validation;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Step;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
@@ -18,7 +15,7 @@ import static io.restassured.RestAssured.given;
 
 @Epic("Query parameters tests")
 public class DuplicateTest extends WeatherApiTestBase {
-
+    AllureLifecycle lifecycle = Allure.getLifecycle();
     private Map<String, String> baseQueryParameters = new HashMap<>();
 
     @BeforeClass
@@ -52,7 +49,7 @@ public class DuplicateTest extends WeatherApiTestBase {
                 {"TC_6.10", "app_code", "QZve9AhazmUb1tY3uX40DQ", 401},
                 {"TC_6.11", "name", "Berlin", 200},
                 {"TC_6.12", "name", "Paris", 200},
-                {"TC_6.13", "product", "observation", 200}
+                {"TC_6.13", "product", "observation", 201}
         };
     }
 
@@ -65,8 +62,6 @@ public class DuplicateTest extends WeatherApiTestBase {
                 given().queryParams(baseQueryParameters).queryParam(paramName, paramValue);
         Response resp = specificationQueryParams.get();
         Assert.assertEquals(resp.statusCode(), statusCode, testCaseNumber + " Wrong status code returned");
-        printBaseDate(baseQueryParameters);
-        headersReport(resp);
     }
 
     // Second Case: wrong app_id ap_code in first place
@@ -80,7 +75,7 @@ public class DuplicateTest extends WeatherApiTestBase {
         Response respQueryParamsFirst = specificationQueryParam.get();
         Assert.assertEquals(
                 respQueryParamsFirst.statusCode(), statusCode, testCaseNumber + " Wrong status code returned");
-        printBaseDate(baseQueryParameters);
-        headersReport(respQueryParamsFirst);
+        lifecycle.updateTestCase(testResult -> testResult.setName("CHANGED_NAME"));
+
     }
 }
