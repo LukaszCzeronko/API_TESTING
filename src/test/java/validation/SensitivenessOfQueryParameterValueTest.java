@@ -1,19 +1,25 @@
 package validation;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
 
-@Slf4j
+@Epic("Query parameters tests")
 public class SensitivenessOfQueryParameterValueTest extends WeatherApiTestBase {
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
+    }
 
     @DataProvider(name = "sensitivenessOfQueryParameterValue")
     public Object[][] queryParameterNameValue() {
@@ -205,10 +211,13 @@ public class SensitivenessOfQueryParameterValueTest extends WeatherApiTestBase {
         return returnValue;
     }
 
+    @Feature("Case sensitiveness test")
+    @Story("Query Value sensitiveness test ")
     @Test(dataProvider = "sensitivenessOfQueryParameterValue")
+    @Description("Verify sensitiveness of parameter value")
     public void queryParameterValueTest(String message, HashMap<String, String> queryParameters, int statusCode) {
-        RequestSpecification specification = given().queryParams(queryParameters);
-        Response resp = specification.get();
-        assertEquals(resp.statusCode(), statusCode, message);
+        Response response = sendRequest(Method.GET, queryParameters);
+        softAssert.assertEquals(response.statusCode(), statusCode, message);
+        softAssert.assertAll();
     }
 }
