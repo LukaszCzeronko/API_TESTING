@@ -3,20 +3,21 @@ package validation;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Step;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Epic("Query parameters tests")
 public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
-    SoftAssert softAssert;
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
+    }
 
     @DataProvider(name = "dataForVariationTest")
     public Object[][] getEventAPIInput() {
@@ -54,10 +55,6 @@ public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
         };
     }
 
-    @BeforeMethod
-    void beforeTest() {
-        softAssert = new ExtendedSoftAssert();
-    }
 
     @Feature("Mandatory parameters test")
     @Test(dataProvider = "dataForVariationTest")

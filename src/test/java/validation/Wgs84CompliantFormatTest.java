@@ -1,13 +1,15 @@
 package validation;
 
-import io.qameta.allure.*;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,6 @@ import java.util.Map;
 @Epic("Query parameters tests")
 public class Wgs84CompliantFormatTest extends WeatherApiTestBase {
     private Map<String, String> baseQueryParameters = new HashMap<>();
-    SoftAssert softAssert;
 
     @BeforeClass
     @Override
@@ -24,6 +25,11 @@ public class Wgs84CompliantFormatTest extends WeatherApiTestBase {
         baseQueryParameters.put("app_id", "JIlgIjxb334PrWXpDC3w");
         baseQueryParameters.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
         baseQueryParameters.put("product", "observation");
+    }
+
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
     }
 
     @DataProvider(name = "coordinates")
@@ -51,7 +57,7 @@ public class Wgs84CompliantFormatTest extends WeatherApiTestBase {
         QueryParameters4.put("longitude", "160.9");
 
         QueryParameters5.put("latitude", "0");
-        QueryParameters5.put("longitude", "-160.9");
+        QueryParameters5.put("longitude", "-168.9");
 
         QueryParameters6.put("latitude", "111");
         QueryParameters6.put("longitude", "0");
@@ -79,15 +85,10 @@ public class Wgs84CompliantFormatTest extends WeatherApiTestBase {
         };
     }
 
-    @BeforeMethod
-    void beforeTest() {
-        softAssert = new ExtendedSoftAssert();
-    }
-
     @Feature("Supported values test")
     @Story("WGS-84 compliant format test")
     @Test(dataProvider = "coordinates")
-    @Description("Verify compatibility with WGS-84 compliant format for values {parameters}, proper status code is equal to {statusCode}")
+    @Description("Verify compatibility with WGS-84 compliant format")
     public void wgs84Format(String testCaseNumber, HashMap<String, String> parameters, int statusCode) {
         Response response = sendRequest(Method.GET, baseQueryParameters, parameters);
         softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);

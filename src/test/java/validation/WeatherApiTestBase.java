@@ -8,20 +8,21 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.BeforeClass;
+import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
-@Slf4j
 @Epic("Query parameters tests")
 public class WeatherApiTestBase {
+    protected SoftAssert softAssert;
 
     @BeforeClass
     public void setUpConstants() {
@@ -31,7 +32,7 @@ public class WeatherApiTestBase {
 
 
     @Step("Sending {methodType} request")
-    Response sendRequest(Method methodType, Map<String, String>... queryParameters) {
+    protected Response sendRequest(Method methodType, Map<String, String>... queryParameters) {
         RequestSpecification newRequestSpecification = given();
         for (Map<String, String> queryParameter : queryParameters) {
             newRequestSpecification.queryParams(queryParameter);
@@ -52,36 +53,24 @@ public class WeatherApiTestBase {
         return response;
     }
 
-    Response sendRequest(Method methodType, Map<String, String> queryParameters, String parameter, String value) {
-        RequestSpecification newRequestSpecification;
-        newRequestSpecification = given().queryParams(queryParameters).queryParam(parameter, value);
-        ByteArrayOutputStream responseOutputStream = new ByteArrayOutputStream();
-        ByteArrayOutputStream requestOutputStream = new ByteArrayOutputStream();
-        PrintStream requestPs = new PrintStream(requestOutputStream, true);
-        PrintStream responsePs = new PrintStream(responseOutputStream, true);
-        RequestLoggingFilter requestLoggingFilter = new RequestLoggingFilter(requestPs);
-        ResponseLoggingFilter responseLoggingFilter = new ResponseLoggingFilter(responsePs);
-        newRequestSpecification.filters(requestLoggingFilter, responseLoggingFilter);
-        Response response = newRequestSpecification.request(methodType);
-        String requestDetails = new String(requestOutputStream.toByteArray());
-        String responseDetails = new String(responseOutputStream.toByteArray());
-        requestDetails(requestDetails);
-        responseDetails(responseDetails);
-        return response;
+    protected Response sendRequest(Method methodType, Map<String, String> queryParameters, String parameter, String value) {
+        Map<String, String> map = new HashMap<>();
+        map.put(parameter, value);
+        return sendRequest(methodType, queryParameters, map);
     }
 
-    String date(int day) {
+    protected String getDateWithOffset(int offset) {
         LocalDate initialData = LocalDate.now();
-        return initialData.plus(Period.ofDays(day)).toString();
+        return initialData.plus(Period.ofDays(offset)).toString();
     }
 
     @Attachment("Response_details")
-    String responseDetails(String responseDetails) {
+    private String responseDetails(String responseDetails) {
         return responseDetails;
     }
 
     @Attachment("Request_details")
-    String requestDetails(String requestDetails) {
+    private String requestDetails(String requestDetails) {
         return requestDetails;
     }
 }

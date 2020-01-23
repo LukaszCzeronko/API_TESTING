@@ -1,13 +1,15 @@
 package validation;
 
-import io.qameta.allure.*;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,6 @@ import java.util.Map;
 @Epic("Query parameters tests")
 public class DuplicateTest extends WeatherApiTestBase {
     private Map<String, String> baseQueryParameters = new HashMap<>();
-    SoftAssert softAssert;
 
     @BeforeClass
     @Override
@@ -25,6 +26,11 @@ public class DuplicateTest extends WeatherApiTestBase {
         baseQueryParameters.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
         baseQueryParameters.put("name", "Berlin");
         baseQueryParameters.put("product", "observation");
+    }
+
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
     }
 
     @DataProvider(name = "duplicateTestFirstCase")
@@ -41,15 +47,10 @@ public class DuplicateTest extends WeatherApiTestBase {
         };
     }
 
-    @BeforeMethod
-    void beforeTest() {
-        softAssert = new ExtendedSoftAssert();
-    }
-
     @Feature("Supported values test")
     @Story("Duplicated query parameters")
     @Test(dataProvider = "duplicateTestFirstCase")
-    @Description("Verify that duplicated {paramName} with value {paramValue} have HTTP code {statusCode}")
+    @Description("Verify that one duplicated parameter returns proper status code")
     public void duplicateQueryParams(String testCaseNumber, String paramName, String paramValue, int statusCode) {
         Response response = sendRequest(Method.GET, baseQueryParameters, paramName, paramValue);
         softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);

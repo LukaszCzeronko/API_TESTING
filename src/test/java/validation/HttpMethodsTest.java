@@ -3,14 +3,12 @@ package validation;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Step;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +16,6 @@ import java.util.Map;
 @Epic("Security testing")
 public class HttpMethodsTest extends WeatherApiTestBase {
     private Map<String, String> baseQueryParameters = new HashMap<>();
-    SoftAssert softAssert;
 
     @BeforeClass
     @Override
@@ -28,6 +25,11 @@ public class HttpMethodsTest extends WeatherApiTestBase {
         baseQueryParameters.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
         baseQueryParameters.put("name", "Berlin");
         baseQueryParameters.put("product", "forecast_hourly");
+    }
+
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
     }
 
     @DataProvider(name = "dataStatusCodes")
@@ -44,14 +46,9 @@ public class HttpMethodsTest extends WeatherApiTestBase {
         };
     }
 
-    @BeforeMethod
-    void beforeTest() {
-        softAssert = new ExtendedSoftAssert();
-    }
-
     @Feature("HTTP methods tests")
     @Test(dataProvider = "dataStatusCodes")
-    @Description("Verify that HTTP response code for method {methodName} is equal to {statusCode}")
+    @Description("Verify that response for HTTP method is correct}")
     public void testHttpMethods(String testCaseNumber, Method methodName, int statusCode) {
         Response response = sendRequest(methodName, baseQueryParameters);
         softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);

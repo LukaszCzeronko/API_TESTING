@@ -14,7 +14,6 @@ public class ExtendedSoftAssert extends SoftAssert {
     private final Map<AssertionError, IAssert<?>> m_errors = Maps.newLinkedHashMap();
     private String assertMessage = null;
 
-
     @Override
     protected void doAssert(IAssert<?> a) {
         onBeforeAssert(a);
@@ -34,7 +33,7 @@ public class ExtendedSoftAssert extends SoftAssert {
 
     @Step("Response validation result")
     public void assertAll() {
-        getHtmlTable(assertionResults.toString());
+        htmlReport(assertionResults.toString());
         if (!m_errors.isEmpty()) {
             StringBuilder sb = new StringBuilder("The following asserts failed:");
             boolean first = true;
@@ -51,8 +50,8 @@ public class ExtendedSoftAssert extends SoftAssert {
         }
     }
 
-    @Attachment(value = "HTML attachment", type = "text/html")
-    public String getHtmlTable(String assertMessage) {
+    @Attachment(value = "Validation results", type = "text/html")
+    public String htmlReport(String assertMessage) {
         StringBuilder addNewColumn = new StringBuilder();
         String[] validationResults = assertMessage.split(",");
         int i = 1;

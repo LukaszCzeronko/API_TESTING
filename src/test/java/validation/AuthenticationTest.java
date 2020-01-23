@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,6 @@ import java.util.Map;
 public class AuthenticationTest extends WeatherApiTestBase {
 
     private Map<String, String> baseQueryParameters = new HashMap<>();
-    SoftAssert softAssert;
 
     @BeforeClass
     @Override
@@ -26,6 +24,11 @@ public class AuthenticationTest extends WeatherApiTestBase {
         super.setUpConstants();
         baseQueryParameters.put("name", "Berlin");
         baseQueryParameters.put("product", "observation");
+    }
+
+    @BeforeMethod
+    void beforeTest() {
+        softAssert = new ExtendedSoftAssert();
     }
 
     @DataProvider(name = "loginData")
@@ -75,11 +78,6 @@ public class AuthenticationTest extends WeatherApiTestBase {
                 {"TC_3.1", queryParams1, 200}, {"TC_3.2", queryParams2, 401}, {"TC_3.3", queryParams3, 401}, {"TC_3.4", queryParams4, 401}, {"TC_3.5", queryParams5, 401},
                 {"TC_3.6", queryParams6, 401}, {"TC_3.7", queryParams7, 401}, {"TC_3.8", queryParams8, 401}, {"TC_3.9", queryParams9, 401}, {"TC_3.10", queryParams10, 401}
         };
-    }
-
-    @BeforeMethod
-    void beforeTest() {
-        softAssert = new ExtendedSoftAssert();
     }
 
     @Feature("Authentication tests")
