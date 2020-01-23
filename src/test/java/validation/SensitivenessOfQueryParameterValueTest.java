@@ -215,7 +215,6 @@ public class SensitivenessOfQueryParameterValueTest extends WeatherApiTestBase {
     @Story("Query Value sensitiveness test ")
     @Test(dataProvider = "sensitivenessOfQueryParameterValue")
     @Description("Verify sensitiveness of parameter value {queryParameters} and assert that HTTP response code is equal to {statusCode}")
-    @Step("Verify sensitiveness of parameter value")
     public void queryParameterValueTest(String message, HashMap<String, String> queryParameters, int statusCode) {
         Response response = sendRequest(Method.GET, queryParameters);
         softAssert.assertEquals(response.statusCode(), statusCode, message);

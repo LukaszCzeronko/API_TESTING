@@ -62,7 +62,6 @@ public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
     @Feature("Mandatory parameters test")
     @Test(dataProvider = "dataForVariationTest")
     @Description("Verify proper functioning for correct mandatory parameters")
-    @Step("Validates mandatory parameters")
     public void requiredMandatoryParameters(String testNumber, Map<String, String> queryParams, int statusCode) {
         Response response = sendRequest(Method.GET, queryParams);
         softAssert.assertEquals(response.statusCode(), statusCode, testNumber);

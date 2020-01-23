@@ -68,7 +68,6 @@ public class DateFormatTest extends WeatherApiTestBase {
     @Story("Date format test")
     @Test(dataProvider = "dateSupported")
     @Description("Verify if the date for the day {day} are supported")
-    @Step("Validates date format system")
     public void dateSupportedTest(String testCaseNumber, int day) {
         Response response = sendRequest(Method.GET, baseQueryParameters, "hourlydate", date(day));
         softAssert.assertTrue(response.getBody().asString().contains("temperature"), testCaseNumber);

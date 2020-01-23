@@ -88,7 +88,6 @@ public class Wgs84CompliantFormatTest extends WeatherApiTestBase {
     @Story("WGS-84 compliant format test")
     @Test(dataProvider = "coordinates")
     @Description("Verify compatibility with WGS-84 compliant format for values {parameters}, proper status code is equal to {statusCode}")
-    @Step("Verify compatibility with WGS-84 compliant format.")
     public void wgs84Format(String testCaseNumber, HashMap<String, String> parameters, int statusCode) {
         Response response = sendRequest(Method.GET, baseQueryParameters, parameters);
         softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);

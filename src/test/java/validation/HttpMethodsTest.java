@@ -52,7 +52,6 @@ public class HttpMethodsTest extends WeatherApiTestBase {
     @Feature("HTTP methods tests")
     @Test(dataProvider = "dataStatusCodes")
     @Description("Verify that HTTP response code for method {methodName} is equal to {statusCode}")
-    @Step("Validates HTTP response code")
     public void testHttpMethods(String testCaseNumber, Method methodName, int statusCode) {
         Response response = sendRequest(methodName, baseQueryParameters);
         softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);

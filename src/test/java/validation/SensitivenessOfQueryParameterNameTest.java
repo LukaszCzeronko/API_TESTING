@@ -179,7 +179,6 @@ public class SensitivenessOfQueryParameterNameTest extends WeatherApiTestBase {
     @Story("Query name sensitiveness test ")
     @Test(dataProvider = "sensitivenessOfQueryParameterName")
     @Description("Verify sensitiveness of parameter name {queryParameters} and assert that HTTP response code is equal to {statusCode}")
-    @Step("Verify sensitiveness of parameter name")
     public void queryParameterNameTest(
             String message, HashMap<String, String> queryParameters, int statusCode) {
         Response response = sendRequest(Method.GET, queryParameters);

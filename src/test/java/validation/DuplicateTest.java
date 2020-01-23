@@ -50,7 +50,6 @@ public class DuplicateTest extends WeatherApiTestBase {
     @Story("Duplicated query parameters")
     @Test(dataProvider = "duplicateTestFirstCase")
     @Description("Verify that duplicated {paramName} with value {paramValue} have HTTP code {statusCode}")
-    @Step("Validates duplicated parameters")
     public void duplicateQueryParams(String testCaseNumber, String paramName, String paramValue, int statusCode) {
         Response response = sendRequest(Method.GET, baseQueryParameters, paramName, paramValue);
         softAssert.assertEquals(response.statusCode(), statusCode, testCaseNumber);
