@@ -1,0 +1,551 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-02-03T16:01:21.640Z",
+        "before": [
+          {
+            "result": {
+              "duration": 877365700,
+              "status": "passed"
+            },
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:24)"
+            }
+          }
+        ],
+        "line": 9,
+        "name": "Testing HTTP methods for HERE Api",
+        "description": "",
+        "id": "test-http-methods;testing-http-methods-for-here-api;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I have a base query parameters",
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:29)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2984061300,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I send request with method name \"GET\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"GET\"",
+                  "offset": 32
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:36)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2020700,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I expect actual response code is equal to 200",
+            "match": {
+              "arguments": [
+                {
+                  "val": "200",
+                  "offset": 42
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:41)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-03T16:01:25.693Z",
+        "before": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:24)"
+            }
+          }
+        ],
+        "line": 10,
+        "name": "Testing HTTP methods for HERE Api",
+        "description": "",
+        "id": "test-http-methods;testing-http-methods-for-here-api;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I have a base query parameters",
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:29)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 613963000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I send request with method name \"POST\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"POST\"",
+                  "offset": 32
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:36)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I expect actual response code is equal to 405",
+            "match": {
+              "arguments": [
+                {
+                  "val": "405",
+                  "offset": 42
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:41)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-03T16:01:26.332Z",
+        "before": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:24)"
+            }
+          }
+        ],
+        "line": 11,
+        "name": "Testing HTTP methods for HERE Api",
+        "description": "",
+        "id": "test-http-methods;testing-http-methods-for-here-api;;4",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I have a base query parameters",
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:29)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 516541300,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I send request with method name \"DELETE\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"DELETE\"",
+                  "offset": 32
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:36)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I expect actual response code is equal to 405",
+            "match": {
+              "arguments": [
+                {
+                  "val": "405",
+                  "offset": 42
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:41)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-03T16:01:26.855Z",
+        "before": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:24)"
+            }
+          }
+        ],
+        "line": 12,
+        "name": "Testing HTTP methods for HERE Api",
+        "description": "",
+        "id": "test-http-methods;testing-http-methods-for-here-api;;5",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I have a base query parameters",
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:29)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 463549600,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I send request with method name \"OPTIONS\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"OPTIONS\"",
+                  "offset": 32
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:36)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I expect actual response code is equal to 405",
+            "match": {
+              "arguments": [
+                {
+                  "val": "405",
+                  "offset": 42
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:41)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-03T16:01:27.335Z",
+        "before": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:24)"
+            }
+          }
+        ],
+        "line": 13,
+        "name": "Testing HTTP methods for HERE Api",
+        "description": "",
+        "id": "test-http-methods;testing-http-methods-for-here-api;;6",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I have a base query parameters",
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:29)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 454452700,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I send request with method name \"PUT\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"PUT\"",
+                  "offset": 32
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:36)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I expect actual response code is equal to 405",
+            "match": {
+              "arguments": [
+                {
+                  "val": "405",
+                  "offset": 42
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:41)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-03T16:01:27.789Z",
+        "before": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:24)"
+            }
+          }
+        ],
+        "line": 14,
+        "name": "Testing HTTP methods for HERE Api",
+        "description": "",
+        "id": "test-http-methods;testing-http-methods-for-here-api;;7",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I have a base query parameters",
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:29)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 664100400,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I send request with method name \"HEAD\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"HEAD\"",
+                  "offset": 32
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:36)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I expect actual response code is equal to 200",
+            "match": {
+              "arguments": [
+                {
+                  "val": "200",
+                  "offset": 42
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:41)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-03T16:01:28.460Z",
+        "before": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:24)"
+            }
+          }
+        ],
+        "line": 15,
+        "name": "Testing HTTP methods for HERE Api",
+        "description": "",
+        "id": "test-http-methods;testing-http-methods-for-here-api;;8",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I have a base query parameters",
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:29)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 632845700,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I send request with method name \"TRACE\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"TRACE\"",
+                  "offset": 32
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:36)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I expect actual response code is equal to 403",
+            "match": {
+              "arguments": [
+                {
+                  "val": "403",
+                  "offset": 42
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:41)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-02-03T16:01:29.093Z",
+        "before": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:24)"
+            }
+          }
+        ],
+        "line": 16,
+        "name": "Testing HTTP methods for HERE Api",
+        "description": "",
+        "id": "test-http-methods;testing-http-methods-for-here-api;;9",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I have a base query parameters",
+            "match": {
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:29)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 485683700,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I send request with method name \"PATCH\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"PATCH\"",
+                  "offset": 32
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:36)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I expect actual response code is equal to 405",
+            "match": {
+              "arguments": [
+                {
+                  "val": "405",
+                  "offset": 42
+                }
+              ],
+              "location": "validation.cucumber.CucumberHttpMethodsTest.\u003cinit\u003e(CucumberHttpMethodsTest.java:41)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Test HTTP methods",
+    "description": "",
+    "id": "test-http-methods",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/HttpMethodsTestScenario.feature",
+    "tags": []
+  }
+]

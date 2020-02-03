@@ -1,4 +1,4 @@
-package validation;
+package validation.testNG;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -8,6 +8,8 @@ import io.restassured.response.Response;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import validation.ExtendedSoftAssert;
+import validation.WeatherApiTestBase;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package validation;
+package validation.testNG;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -9,11 +9,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import validation.ExtendedSoftAssert;
+import validation.WeatherApiTestBase;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Epic("Security testing")
 public class AuthenticationTest extends WeatherApiTestBase {
 
     private Map<String, String> baseQueryParameters = new HashMap<>();

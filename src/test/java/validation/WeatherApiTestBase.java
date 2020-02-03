@@ -59,6 +59,7 @@ public class WeatherApiTestBase {
         return sendRequest(methodType, queryParameters, map);
     }
 
+
     protected String getDateWithOffset(int offset) {
         LocalDate initialData = LocalDate.now();
         return initialData.plus(Period.ofDays(offset)).toString();
