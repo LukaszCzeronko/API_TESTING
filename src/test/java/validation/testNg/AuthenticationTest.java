@@ -1,6 +1,7 @@
 package validation.testNg;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
@@ -14,6 +15,7 @@ import validation.WeatherApiTestBase;
 import java.util.HashMap;
 import java.util.Map;
 
+@Epic("Security testing")
 public class AuthenticationTest extends WeatherApiTestBase {
 
     private Map<String, String> baseQueryParameters = new HashMap<>();

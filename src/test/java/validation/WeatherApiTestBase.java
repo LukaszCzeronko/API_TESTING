@@ -33,7 +33,7 @@ public class WeatherApiTestBase {
 
     @Step("Sending {methodType} request")
     protected Response sendRequest(Method methodType, Map<String, String>... queryParameters) {
-        RequestSpecification newRequestSpecification = given();
+        RequestSpecification newRequestSpecification = given().log().all();
         for (Map<String, String> queryParameter : queryParameters) {
             newRequestSpecification.queryParams(queryParameter);
         }
