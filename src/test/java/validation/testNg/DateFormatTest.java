@@ -1,4 +1,4 @@
-package validation.testNG;
+package validation.testNg;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -16,8 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DateFormatTest extends WeatherApiTestBase {
-
-
     private Map<String, String> baseQueryParameters = new HashMap<>();
 
     @BeforeClass

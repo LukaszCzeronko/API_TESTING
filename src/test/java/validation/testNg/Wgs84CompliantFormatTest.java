@@ -1,4 +1,4 @@
-package validation.testNG;
+package validation.testNg;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;

@@ -15,6 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +30,6 @@ public class WeatherApiTestBase {
         baseURI = "https://weather.api.here.com";
         basePath = "/weather/1.0/report.json";
     }
-
 
     @Step("Sending {methodType} request")
     protected Response sendRequest(Method methodType, Map<String, String>... queryParameters) {
@@ -61,8 +61,26 @@ public class WeatherApiTestBase {
 
 
     protected String getDateWithOffset(int offset) {
-        LocalDate initialData = LocalDate.now();
+        LocalDate initialData = LocalDate.now(ZoneOffset.UTC);
         return initialData.plus(Period.ofDays(offset)).toString();
+    }
+
+    protected String booleanValueToString(boolean value) {
+        if (value) {
+            return "available";
+        } else
+            return "not available";
+    }
+
+    protected String booleanValueToString(int value) {
+        if (value == 200) {
+            return "available";
+        } else if (value == 400) {
+            return "not available";
+        } else if (value == 401) {
+            return "Unauthorized";
+        }
+        return "not supported value";
     }
 
     @Attachment("Response_details")

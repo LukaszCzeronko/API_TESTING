@@ -5,14 +5,14 @@
 
     <test name="All API validation tests">
         <classes>
-            <class name="validation.testNG.DuplicateTest"/>
-            <class name="validation.testNG.HttpMethodsTest"/>
-            <class name="validation.testNG.SensitivenessOfQueryParameterNameTest"/>
-            <class name="validation.testNG.SensitivenessOfQueryParameterValueTest"/>
-            <class name="validation.testNG.WeatherApiMandatoryParametersTest"/>
-            <class name="validation.testNG.AuthenticationTest"/>
-            <class name="validation.testNG.DateFormatTest"/>
-            <class name="validation.testNG.Wgs84CompliantFormatTest"/>
+            <class name="validation.testNg.DuplicateTest"/>
+            <class name="validation.testNg.HttpMethodsTest"/>
+            <class name="validation.testNg.SensitivenessOfQueryParameterNameTest"/>
+            <class name="validation.testNg.SensitivenessOfQueryParameterValueTest"/>
+            <class name="validation.testNg.WeatherApiMandatoryParametersTest"/>
+            <class name="validation.testNg.AuthenticationTest"/>
+            <class name="validation.testNg.DateFormatTest"/>
+            <class name="validation.testNg.Wgs84CompliantFormatTest"/>
         </classes>
     </test>
 

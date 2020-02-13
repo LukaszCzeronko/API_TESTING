@@ -1,7 +1,6 @@
-package validation.testNG;
+package validation.testNg;
 
 import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.restassured.http.Method;
 import io.restassured.response.Response;

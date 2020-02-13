@@ -1,4 +1,4 @@
-package validation.testNG;
+package validation.testNg;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -56,7 +56,6 @@ public class WeatherApiMandatoryParametersTest extends WeatherApiTestBase {
                 {"TC_1.4", queryParams4, 200},
         };
     }
-
 
     @Feature("Mandatory parameters test")
     @Test(dataProvider = "dataForVariationTest")
