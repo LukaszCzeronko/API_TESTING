@@ -1,18 +1,21 @@
 Feature: Test date format
 
   Scenario Outline: Testing date format for HERE Api
-    Given I have a base query parameters
-    When I send request with specified date from current day <day>
-    Then I expect that actual data for that day is <expectedData>
+    Given I have base "app_id"
+    And I have base "app_code"
+    And  I have base "name"
+    And I have base "product"
+    When I send request with specified <day>
+    Then I expect that actual data for that day is <status>
     Examples:
-      | day | expectedData    |
-      | -1  | "not available" |
-      | 0   | "available"     |
-      | 1   | "available"     |
-      | 2   | "available"     |
-      | 3   | "available"     |
-      | 4   | "available"     |
-      | 5   | "available"     |
-      | 6   | "available"     |
-      | 7   | "available"     |
-      | 8   | "not available" |
+      | day | status  |
+      | -1  | "false" |
+      | 0   | "true"  |
+      | 1   | "true"  |
+      | 2   | "true"  |
+      | 3   | "true"  |
+      | 4   | "true"  |
+      | 5   | "true"  |
+      | 6   | "true"  |
+      | 7   | "true"  |
+      | 8   | "false" |

@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 
 @CucumberOptions(
         features = "src/test/resources/features",
-        plugin = {"pretty", "html: cucumber-html-reports",
-                "json: cucumber-html-reports/cucumber.json"},
+        plugin = {"pretty", "html:target/cucumber-html-reports",
+                "json:target/cucumber-html-reports/cucumber.json"},
         glue = "validation/cucumber")
 
 public class TestRunner extends AbstractTestNGCucumberTests {

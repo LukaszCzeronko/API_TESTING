@@ -1,7 +1,10 @@
 Feature: Test HTTP methods
 
   Scenario Outline: Testing HTTP methods for HERE Api
-    Given I have a base query parameters
+    Given I have base "app_id"
+    And I have base "app_code"
+    And I have base "product"
+    And I have base "name"
     When I send request with method name "<methodName>"
     Then I expect actual response code is equal to <expectedStatusCode>
     Examples:

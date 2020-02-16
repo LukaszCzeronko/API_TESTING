@@ -65,24 +65,6 @@ public class WeatherApiTestBase {
         return initialData.plus(Period.ofDays(offset)).toString();
     }
 
-    protected String booleanValueToString(boolean value) {
-        if (value) {
-            return "available";
-        } else
-            return "not available";
-    }
-
-    protected String booleanValueToString(int value) {
-        if (value == 200) {
-            return "available";
-        } else if (value == 400) {
-            return "not available";
-        } else if (value == 401) {
-            return "Unauthorized";
-        }
-        return "not supported value";
-    }
-
     @Attachment("Response_details")
     private String responseDetails(String responseDetails) {
         return responseDetails;
