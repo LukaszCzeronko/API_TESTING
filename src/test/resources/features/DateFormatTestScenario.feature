@@ -1,10 +1,10 @@
 Feature: Test date format
 
   Scenario Outline: Testing date format for HERE Api
-    Given I have base "app_id"
-    And I have base "app_code"
-    And  I have base "name"
-    And I have base "product"
+    Given I have base query parameter "app_id"
+    And I have base query parameter "app_code"
+    And I have base query parameter "name"
+    And I have base query parameter "product"
     When I send request with specified <day>
     Then I expect that actual data for that day is <status>
     Examples:

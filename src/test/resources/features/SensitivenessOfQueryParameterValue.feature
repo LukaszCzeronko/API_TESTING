@@ -1,10 +1,10 @@
 Feature: Test Sensitiveness of query parameter name
 
   Scenario Outline: Testing sensitiveness of query parameter value
-    Given I have base "app_code"
-    And I have base "name"
-    And I have base "product"
-    When I send request with specified <value> <actual>
+    Given I have base query parameter "app_code"
+    And I have base query parameter "name"
+    And I have base query parameter "product"
+    When I send request with specified query parameter name: <value> with value: <actual>
     Then I expect response is <status>
     Examples:
       | actual                 | value    | status         |
@@ -14,10 +14,10 @@ Feature: Test Sensitiveness of query parameter name
 
 
   Scenario Outline: Testing sensitiveness of query parameter value
-    Given I have base "app_id"
-    And I have base "name"
-    And I have base "product"
-    When I send request with specified <value> <actual>
+    Given I have base query parameter "app_id"
+    And I have base query parameter "name"
+    And I have base query parameter "product"
+    When I send request with specified query parameter name: <value> with value: <actual>
     Then I expect response is <status>
     Examples:
       | actual                   | value      | status         |
@@ -26,10 +26,10 @@ Feature: Test Sensitiveness of query parameter name
       | "qzvw9ahazmub1ty3ux40dq" | "app_code" | "Unauthorized" |
 
   Scenario Outline: Testing sensitiveness of query parameter value
-    Given I have base "app_id"
-    And I have base "app_code"
-    And I have base "product"
-    When I send request with specified <value> <actual>
+    Given I have base query parameter "app_id"
+    And I have base query parameter "app_code"
+    And I have base query parameter "product"
+    When I send request with specified query parameter name: <value> with value: <actual>
     Then I expect response is <status>
     Examples:
       | actual   | value  | status |
@@ -38,10 +38,10 @@ Feature: Test Sensitiveness of query parameter name
       | "BERLIN" | "name" | "OK"   |
 
   Scenario Outline: Testing sensitiveness of query parameter value
-    Given I have base "app_id"
-    And I have base "app_code"
-    And I have base "name"
-    When I send request with specified <value> <actual>
+    Given I have base query parameter "app_id"
+    And I have base query parameter "app_code"
+    And I have base query parameter "name"
+    When I send request with specified query parameter name: <value> with value: <actual>
     Then I expect response is <status>
     Examples:
       | actual                  | value     | status |
@@ -57,11 +57,11 @@ Feature: Test Sensitiveness of query parameter name
       | "FORECAST_ASTRONOMY"    | "product" | "Bad Request"   |
 
   Scenario Outline: Testing sensitiveness of query parameter value
-    Given I have base "app_id"
-    And I have base "app_code"
-    And I have base "name"
-    And I have base "product"
-    When I send request with specified <value> <actual>
+    Given I have base query parameter "app_id"
+    And I have base query parameter "app_code"
+    And I have base query parameter "name"
+    And I have base query parameter "product"
+    When I send request with specified query parameter name: <value> with value: <actual>
     Then I expect response is <status>
     Examples:
       | actual   | value      | status |

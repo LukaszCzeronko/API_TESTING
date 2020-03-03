@@ -1,10 +1,10 @@
 Feature: Test mandatory parameters
 
   Scenario Outline: Testing mandatory parameters for HERE Api
-    Given I have base "app_id"
-    And I have base "app_code"
-    And I have base "product"
-    When I send request with specified <name> <value>
+    Given I have base query parameter "app_id"
+    And I have base query parameter "app_code"
+    And I have base query parameter "product"
+    When I send request with specified query parameter name: <name> with value: <value>
     Then I expect response is <status>
     Examples:
       | name      | value    | status |
@@ -13,13 +13,13 @@ Feature: Test mandatory parameters
 
 
   Scenario Outline: Testing mandatory parameters for HERE Api
-    Given I have base "app_id"
-    And I have base "app_code"
-    And I have base "product"
-    And I have base "latitude"
-    And I have base "longitude"
-    When I send request with specified "language" "polish"
+    Given I have base query parameter "app_id"
+    And I have base query parameter "app_code"
+    And I have base query parameter "product"
+    And I have base query parameter "latitude"
+    And I have base query parameter "longitude"
+    When I send request with specified query parameter name: <name> with value: <value>
     Then I expect response is <status>
     Examples:
-      | status |
-      | "OK"   |
+      | name       | value    | status |
+      | "language" | "polish" | "OK"   |

@@ -1,10 +1,10 @@
 Feature: Test authentication
 
   Scenario Outline: Testing authentication for HERE Api
-    Given I have base "app_code"
-    And I have base "name"
-    And I have base "product"
-    When I send request with specified "app_id" <app_id>
+    Given I have base query parameter "app_code"
+    And I have base query parameter "name"
+    And I have base query parameter "product"
+    When I send request with specified query parameter name: "app_id" with value: <app_id>
     Then I expect response is <status>
     Examples:
       | app_id                  | status         |
@@ -14,10 +14,10 @@ Feature: Test authentication
       | "JIlgIjxb334 PrWXpDC3w" | "Unauthorized" |
 
   Scenario Outline: Testing authentication for HERE Api
-    Given I have base "app_id"
-    And I have base "name"
-    And I have base "product"
-    When I send request with specified "app_code" <app_code>
+    Given I have base query parameter "app_id"
+    And I have base query parameter "name"
+    And I have base query parameter "product"
+    When I send request with specified query parameter name: "app_code" with value: <app_code>
     Then I expect response is <status>
     Examples:
       | app_code                   | status         |
@@ -27,10 +27,10 @@ Feature: Test authentication
       | "QZvw9AhazmUb 1tY3uX40DQ"  | "Unauthorized" |
 
   Scenario Outline: Testing authentication for HERE Api
-    Given I have base "app_id" <app_id>
-    And I have base "product"
-    And I have base "name"
-    When I send request with specified "app_code" <app_code>
+    Given I have base query parameter "app_id" <app_id>
+    And I have base query parameter "product"
+    And I have base query parameter "name"
+    When I send request with specified query parameter name: "app_code" with value: <app_code>
     Then I expect response is <status>
     Examples:
       | app_id                   | app_code                 | status         |

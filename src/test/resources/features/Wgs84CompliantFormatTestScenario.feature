@@ -1,9 +1,9 @@
 Feature: Test WGS84 format
 
   Scenario Outline: Testing WGS84 compliant format for HERE Api
-    Given I have base "app_id"
-    And I have base "app_code"
-    And I have base "product"
+    Given I have base query parameter "app_id"
+    And I have base query parameter "app_code"
+    And I have base query parameter "product"
     When I send request with specified "longitude" <longitude> "latitude" <latitude>
     Then I expect response is <status>
     Examples:

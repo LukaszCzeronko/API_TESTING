@@ -1,12 +1,12 @@
 Feature: Test duplicated parameters
 
   Scenario Outline: Testing duplicated parameters for HERE Api
-    Given I have base "app_id"
-    And I have base "app_id"
-    And I have base "app_code"
-    And I have base "name"
-    And I have base "product"
-    When I send request with specified <parameterName> <parameterValue>
+    Given I have base query parameter "app_id"
+    And I have base query parameter "app_id"
+    And I have base query parameter "app_code"
+    And I have base query parameter "name"
+    And I have base query parameter "product"
+    When I send request with specified query parameter name: <parameterName> with value: <parameterValue>
     Then I expect response is <status>
     Examples:
       | parameterName | parameterValue           | status |
