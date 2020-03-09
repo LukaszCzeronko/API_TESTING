@@ -63,11 +63,11 @@ public class CucumberTestBase extends WeatherApiTestBase {
         response = sendRequest(Method.GET, baseQueryParameters, "hourlydate", getDateWithOffset(offset));
     }
 
-    @When("I send request with specified {string} {string} {string} {string}")
-    public void i_send_request_with_specified(String name1, String longitude, String name2, String latitude) {
+    @When("I send request with specified longitude {string} latitude {string}")
+    public void i_send_request_with_specified_longitude_latitude(String longitude, String latitude) {
         Map<String, String> map = new HashMap<>();
-        map.put(name1, longitude);
-        map.put(name2, latitude);
+        map.put("longitude", longitude);
+        map.put("latitude", latitude);
         response = sendRequest(Method.GET, baseQueryParameters, map);
     }
 

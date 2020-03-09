@@ -4,7 +4,7 @@ Feature: Test WGS84 format
     Given I have base query parameter "app_id"
     And I have base query parameter "app_code"
     And I have base query parameter "product"
-    When I send request with specified "longitude" <longitude> "latitude" <latitude>
+    When I send request with specified longitude <longitude> latitude <latitude>
     Then I expect response is <status>
     Examples:
       | longitude | latitude | status          |
