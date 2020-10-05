@@ -1,4 +1,4 @@
-package validation;
+package validation.testNg;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -9,6 +9,8 @@ import io.restassured.response.Response;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import validation.ExtendedSoftAssert;
+import validation.WeatherApiTestBase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -136,6 +138,7 @@ public class SensitivenessOfQueryParameterNameTest extends WeatherApiTestBase {
         queryParametersName17.put("metRic", "true"); // metric->metRic
 
         queryParametersName18.put("app_id", "JIlgIjxb334PrWXpDC3w");
+        queryParametersName18.put("app_code", "QZvw9AhazmUb1tY3uX40DQ");
         queryParametersName18.put("name", "Berlin");
         queryParametersName18.put("product", "observation");
         queryParametersName18.put("METRIC", "true"); // metric->METRIC
@@ -169,7 +172,7 @@ public class SensitivenessOfQueryParameterNameTest extends WeatherApiTestBase {
                 {"TC_4.14", queryParametersName15, 200},
                 {"TC_4.15", queryParametersName16, 200},
                 {"TC_4.16", queryParametersName17, 200},
-                {"TC_4.17", queryParametersName18, 400},
+                {"TC_4.17", queryParametersName18, 200},
                 {"TC_4.18", queryParametersName19, 200},
                 {"TC_4.19", queryParametersName20, 200},
         };

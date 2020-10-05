@@ -1,4 +1,4 @@
-package validation;
+package validation.testNg;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -9,13 +9,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import validation.ExtendedSoftAssert;
+import validation.WeatherApiTestBase;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class DateFormatTest extends WeatherApiTestBase {
-
-
     private Map<String, String> baseQueryParameters = new HashMap<>();
 
     @BeforeClass
